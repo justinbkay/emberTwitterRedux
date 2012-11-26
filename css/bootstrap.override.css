@@ -1,0 +1,38 @@
+body {
+	margin: 10px 0 0 0;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.loader {
+	margin-top: 20px;
+}
+
+.loader img {
+	padding-bottom: 5px;
+}
+
+.tweet {
+	padding: 8px;
+	border: 1px solid #DDD;
+	border-radius: 4px;
+	-o-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	margin: 0 0 5px 0;
+}
+.tweet_profile_pic {
+	width: 48px;
+}
+.tweet_data {
+	width: 400px;
+}
+.tweet_meta  small {
+	color: #888;
+	font-size: 10px;
+}
+.tweet_meta {
+	margin-bottom: 4px;
+}
