@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Ember Based Twitter Search</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.override.css">
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+  </head>
+  <body>
+
+    <script type="text/x-handlebars" data-template-name="application">
+      <div id="frm" class="span12 text-center">
+        <strong>Search Twitter:</strong>
+        {{view App.SearchTextField id="term"}}
+      </div>
+      {{outlet}}
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="instructions">
+      <div class="span6 offset3">
+          <p>To display some Tweets, please use the search box above.</p>
+      </div>
+    </script>
+
+    <script type="text/x-handlebars" data-template-name="tweets">
+      <div id="content" class="span12">
+        <div class="row">
+          <div class="span6 offset3">
+            {{#each tweet in controller}}
+              {{#view App.tweetsV}}
+                <div class="row">
+                  <div class="span6 clearfix tweet">
+                    <div class="pull-left tweet_profile_pic">
+                      <img {{bindAttr src="profilePic"}} />
+                    </div>
+                    <div class="pull-right tweet_data">
+                      <div class="clearfix tweet_meta">
+                        <div class="pull-left"><strong>{{username}}</strong></div>
+                        <div class="pull-right"><small>{{date}}</small></div>
+                      </div>
+                      <p>{{text}}</p>
+                    </div>
+                  </div>
+                </div>
+              {{/view}}
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </script>
+
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/jquery.timeago.js"></script>
+		<script src="js/lib/handlebars-1.0.rc.1.js"></script>
+    <script src="js/lib/ember-1.0.0-pre.2.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
+
