@@ -20,13 +20,16 @@ App.Tweet = Ember.Object.extend({
   text: null
 });
 
-//App.InstructionsController = Ember.Controller.extend();
 App.InstructionsView = Ember.View.extend({
   templateName: 'instructions'
 });
 
 App.LoadingView = Ember.View.extend({
   templateName: 'loading'
+});
+
+App.LimitedView = Ember.View.extend({
+  templateName: 'limited'
 });
 
 App.NoresultsView = Ember.View.extend({
@@ -59,7 +62,7 @@ App.Tweet.reopenClass({
 
   loadTweetsCompleted: function(xhr) {
     if(xhr.status == 400 || xhr.status == 420) {
-      this.set('limit', true);
+      App.router.send('limited');
     }
   },
 
@@ -91,7 +94,6 @@ App.Router = Ember.Router.extend({
     index: Ember.Route.extend({
       route: '/',
       showLoading: Ember.Route.transitionTo('loading'),
-      showNoresults: Ember.Route.transitionTo('noResults'),
 
       //child states
       initialState: 'instructions',
@@ -113,6 +115,9 @@ App.Router = Ember.Router.extend({
         },
         showNoresults: function(router) {
           router.get('applicationController').connectOutlet('noresults');
+        },
+        limited: function(router) {
+          router.get('applicationController').connectOutlet('limited');
         }
       })
 
