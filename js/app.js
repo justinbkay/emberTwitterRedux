@@ -10,7 +10,6 @@ App.SearchTextField = Ember.TextField.extend({
     this.get('controller.target').send('showLoading');
     // load the tweets
     App.Tweet.loadTweets(this.value);
-    this.get('controller.target').send('showTweets');
   }
 });
 
@@ -28,6 +27,10 @@ App.InstructionsView = Ember.View.extend({
 
 App.LoadingView = Ember.View.extend({
   templateName: 'loading'
+});
+
+App.NoresultsView = Ember.View.extend({
+  templateName: 'noresults'
 });
 
 App.TweetsController = Ember.ArrayController.extend({
@@ -75,9 +78,10 @@ App.Tweet.reopenClass({
     }, this);
 
     if (this.loadedTweets.length === 0) {
-      this.set('noresults', true);
+      App.router.send('showNoresults');
+    } else {
+      App.router.send('showTweets');
     }
-
   }
 
 });
@@ -87,7 +91,7 @@ App.Router = Ember.Router.extend({
     index: Ember.Route.extend({
       route: '/',
       showLoading: Ember.Route.transitionTo('loading'),
-      showTweets: Ember.Route.transitionTo('showResults'),
+      showNoresults: Ember.Route.transitionTo('noResults'),
 
       //child states
       initialState: 'instructions',
@@ -103,13 +107,12 @@ App.Router = Ember.Router.extend({
         route: '/',
         connectOutlets: function(router) {
           router.get('applicationController').connectOutlet('loading');
-        }
-      }),
-
-      showResults: Ember.Route.extend({
-        route: '/',
-        connectOutlets: function(router) {
+        },
+        showTweets: function(router) {
           router.get('applicationController').connectOutlet('tweets', App.Tweet.loadedTweets);
+        },
+        showNoresults: function(router) {
+          router.get('applicationController').connectOutlet('noresults');
         }
       })
 
