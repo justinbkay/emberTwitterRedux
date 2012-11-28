@@ -40,22 +40,20 @@
         <div class="row">
           <div class="span6 offset3">
             {{#each tweet in controller}}
-              {{#view App.tweetsV}}
-                <div class="row">
-                  <div class="span6 clearfix tweet">
-                    <div class="pull-left tweet_profile_pic">
-                      <img {{bindAttr src="profilePic"}} />
+              <div class="row">
+                <div class="span6 clearfix tweet">
+                  <div class="pull-left tweet_profile_pic">
+                    <img {{bindAttr src="tweet.profilePic"}} />
+                  </div>
+                  <div class="pull-right tweet_data">
+                    <div class="clearfix tweet_meta">
+                      <div class="pull-left"><strong>{{tweet.username}}</strong></div>
+                      <div class="pull-right"><small>{{tweet.date}}</small></div>
                     </div>
-                    <div class="pull-right tweet_data">
-                      <div class="clearfix tweet_meta">
-                        <div class="pull-left"><strong>{{username}}</strong></div>
-                        <div class="pull-right"><small>{{date}}</small></div>
-                      </div>
-                      <p>{{text}}</p>
-                    </div>
+                    <p>{{tweet.text}}</p>
                   </div>
                 </div>
-              {{/view}}
+              </div>
             {{/each}}
           </div>
         </div>
